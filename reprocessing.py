@@ -6,7 +6,7 @@ from scipy.ndimage.filters import maximum_filter1d
 from scipy.signal import (butter, filtfilt, iirnotch, iirfilter, sosfilt, zpk2sos)
 
 
-def good_beat_annotations(
+def beat_annotations(
         annotation
 ):
     """ Get rid of non-beat markers """
@@ -38,6 +38,46 @@ def good_beat_annotations(
     symbols = np.asarray(annotation.symbol)[ids]
 
     return samples, symbols
+
+
+from scipy.ndimage.filters import maximum_filter1d
+from scipy.signal import (butter, filtfilt, iirnotch, iirfilter, sosfilt, zpk2sos)
+
+
+def supra_ven_beat_annotations(
+        annotation
+):
+    """ Get rid of non-beat markers """
+    #                                 '"NOR": ["N"], '
+    #                                 '"LBBB": ["L"], '
+    #                                 '"RBBB": ["R"], '
+    #                                 '"APC": ["A"], '
+    #                                 '"PVC": ["V"], '
+    #                                 '"PACE": ["/"], '
+    #                                 '"AP": ["a"], '
+    #                                 '"VF": ["!"], '
+    #                                 '"VFN": ["F"], '
+    #                                 '"NE": ["j"], '
+    #                                 '"FPN": ["f"], '
+    #                                 '"VE": ["E"], '
+    #                                 '"NP": ["J"], '
+    #                                 '"AE": ["e"], '
+    #                                 '"UN" : ["Q"]'
+    # good = ['N', 'L', 'R', 'A', 'V', '/', 'a', '!', 'F', 'j', 'f', 'E', 'J', 'e', 'Q', 'S']
+    #good = ['N', 'L', 'R', 'B', 'A', 'a', 'J', 'S', 'V', 'r', 'F', 'e', 'j', 'n', 'E', '/', 'f', 'Q', '?']
+    # normal = ['N', 'L', 'R', 'j', 'e']
+    supra_ventricular = ['a', 'S', 'A', 'J']
+    # ventricular = ['!', 'E', 'V']
+    # fusion = ['F']
+    # unknow = ['P', 'Q', 'f']
+
+    ids = np.in1d(annotation.symbol, supra_ventricular)
+    samples = annotation.sample[ids]
+    symbols = np.asarray(annotation.symbol)[ids]
+
+    return samples, symbols
+
+
 
 
 def afib_annotations(

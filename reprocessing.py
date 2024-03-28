@@ -44,7 +44,7 @@ from scipy.ndimage.filters import maximum_filter1d
 from scipy.signal import (butter, filtfilt, iirnotch, iirfilter, sosfilt, zpk2sos)
 
 
-def supra_ven_beat_annotations(
+def normal_beat_annotations(
         annotation
 ):
     """ Get rid of non-beat markers """
@@ -65,13 +65,13 @@ def supra_ven_beat_annotations(
     #                                 '"UN" : ["Q"]'
     # good = ['N', 'L', 'R', 'A', 'V', '/', 'a', '!', 'F', 'j', 'f', 'E', 'J', 'e', 'Q', 'S']
     #good = ['N', 'L', 'R', 'B', 'A', 'a', 'J', 'S', 'V', 'r', 'F', 'e', 'j', 'n', 'E', '/', 'f', 'Q', '?']
-    # normal = ['N', 'L', 'R', 'j', 'e']
-    supra_ventricular = ['a', 'S', 'A', 'J']
-    # ventricular = ['!', 'E', 'V']
-    # fusion = ['F']
+    normal = ['N', 'L', 'R', 'j', 'e']
+    #supra_ventricular = ['a', 'S', 'A', 'J']
+    #ventricular = ['!', 'E', 'V']
+    #fusion = ['F']
     # unknow = ['P', 'Q', 'f']
 
-    ids = np.in1d(annotation.symbol, supra_ventricular)
+    ids = np.in1d(annotation.symbol, normal)
     samples = annotation.sample[ids]
     symbols = np.asarray(annotation.symbol)[ids]
 

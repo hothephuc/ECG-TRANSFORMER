@@ -71,7 +71,7 @@ def normal_beat_annotations(
     #fusion = ['F']
     # unknow = ['P', 'Q', 'f']
 
-    ids = np.in1d(annotation.symbol, normal)
+    ids = np.in1d(annotation.symbol,normal)
     samples = annotation.sample[ids]
     symbols = np.asarray(annotation.symbol)[ids]
 

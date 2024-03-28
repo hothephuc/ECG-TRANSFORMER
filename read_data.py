@@ -13,7 +13,7 @@ def read_annotate(path):
 def spliting_index(chunk_size,chunk_step, max_index, num_overlap, start_idx ):
   num_overlap= chunk_size-num_overlap
   chunk_size = chunk_size
-  max_index = max_index -chunk_size +2
+  max_index = max_index -chunk_size 
   index_array = np.arange(0, chunk_size,chunk_step)[None, :]+np.arange(start_idx,max_index, num_overlap)[:,None]
   return index_array
 
